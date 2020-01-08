@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ImagesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @image = images(:one)
+    @image = Image.new
   end
 
   test 'should get new' do
@@ -19,7 +19,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show image' do
-    get image_url(@image)
+    get image_url(Image.last)
     assert_response :success
   end
 end
