@@ -11,7 +11,6 @@ class URLValidator < ActiveModel::Validator
   end
 end
 
-
 class Image < ApplicationRecord
   include ActiveModel::Validations
   validates_with URLValidator
