@@ -1,14 +1,11 @@
-class URLValidator < ActiveModel::Validator
-  def validate(record)
-    return if record.url.start_with?('https://')
-    return if record.url.start_with?('http://')
-
-    record.errors[:base] << 'Invalid URL'
-  end
-end
-
 class Image < ApplicationRecord
-  include ActiveModel::Validations
-  validates_with URLValidator
   validates :url, presence: true
+  validate :valid_url
+
+  def valid_url
+    return if url.start_with?('https://')
+    return if url.start_with?('http://')
+
+    errors.add(:url, 'Invalid URL')
+  end
 end
