@@ -1,6 +1,6 @@
 class ImagesController < ApplicationController
   def show
-    @image = Image.find(params[:id])
+    @image = Image.find(params.require(:id))
   end
 
   def new
@@ -12,7 +12,7 @@ class ImagesController < ApplicationController
     if @image.save
       redirect_to @image
     else
-      render 'new'
+      render :new
     end
   end
 
