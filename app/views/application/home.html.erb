@@ -1,2 +1,7 @@
 <h1>Hello World!</h1>
-<%= link_to "Upload Image", new_image_path %>
+<h4>
+  <%= link_to "Upload Image", new_image_path %>
+</h4>
+<% @images.each do |image| %>
+  <%= image_tag image.url %>
+<% end %>
