@@ -3,6 +3,10 @@ class ImagesController < ApplicationController
     @image = Image.find(params.require(:id))
   end
 
+  def index
+    @images = Image.order(created_at: :desc)
+  end
+
   def new
     @image = Image.new
   end
