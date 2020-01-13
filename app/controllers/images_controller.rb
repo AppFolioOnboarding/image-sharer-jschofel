@@ -3,6 +3,11 @@ class ImagesController < ApplicationController
     @image = Image.find(params.require(:id))
   end
 
+  def filter
+    @images = Image.tagged_with(params[:tag])
+    @image_tag = params[:tag]
+  end
+
   def index
     @images = Image.order(created_at: :desc)
   end

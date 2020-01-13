@@ -1,0 +1,7 @@
+<%= render "application/header" %>
+<h4>
+  <%= @images.length %>
+  results for
+  "<%= @image_tag %>"
+</h4>
+<%= render "application/images", images: @images %>
