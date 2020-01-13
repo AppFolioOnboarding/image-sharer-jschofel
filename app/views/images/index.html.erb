@@ -1,7 +1,4 @@
-<h1>Hello World!</h1>
-<h4>
-  <%= link_to "Upload Image", new_image_path %>
-</h4>
+<% render "application/header" %>
 <% @images.each do |image| %>
     <div class="image-tag-container">
       <%= image_tag image.url %>
