@@ -19,11 +19,11 @@
   border: 0;
 }
 
-h1 {
-
-}
-
-img {
+.image-tag-container {
   max-width: 400px;
   margin: 10px;
+}
+
+.image-tag-container img {
+  width: 100%;
 }

@@ -26,4 +26,6 @@
   https://www.yellowstonepark.com/.image/t_share/MTU1MjcyMDkzODkyODgwMjc5/bighorn-glaciernp_tamkimjohnston_700.jpg
   https://c402277.ssl.cf1.rackcdn.com/photos/3336/images/blog_media_carousel/big_horn_sheep.jpg?1357619628
   https://media.gannett-cdn.com/44692040001/44692040001_5539115479001_5539107137001-vs.jpg?pubId=44692040001
-].each { |image_url| Image.create(url: image_url) }
+].each do |image_url|
+  Image.create(url: image_url, tag_list: 'Glacier National Park, Outdoors')
+end
