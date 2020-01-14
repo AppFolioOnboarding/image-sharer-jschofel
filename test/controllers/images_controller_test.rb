@@ -61,15 +61,15 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
       even = n.even? ? 'Even' : 'Odd'
       Image.create(url: "https://www.images.com/#{n}", tag_list: "Outdoors, Tag#{n}, #{even}")
     end
-    get filter_path(tag: 'Outdoors')
+    get root_path(tag: 'Outdoors')
     assert_select 'div', attributes: { class: 'image-tag-wrapper' }, count: img_num
     assert_select 'a', text: 'Even', count: img_num / 2
     assert_select 'a', text: 'Odd', count: img_num / 2
-    get filter_path(tag: 'Even')
+    get root_path(tag: 'Even')
     assert_select 'div', attributes: { class: 'image-tag-wrapper' }, count: img_num / 2
     assert_select 'a', text: 'Even', count: img_num / 2
     assert_select 'a', text: 'Odd', count: 0
-    get filter_path(tag: 'Odd')
+    get root_path(tag: 'Odd')
     assert_select 'div', attributes: { class: 'image-tag-wrapper' }, count: img_num / 2
     assert_select 'a', text: 'Even', count: 0
     assert_select 'a', text: 'Odd', count: img_num / 2
