@@ -33,7 +33,8 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   test 'should be descending order html' do
     img_num = 10
     img_num.times do |n|
-      Image.create(url: "https://www.images.com/#{n}", tag_list: "Outdoors, Tag#{n}")
+      even = n.even? ? 'Even' : 'Odd'
+      Image.create(url: "https://www.images.com/#{n}", tag_list: "Outdoors, Tag#{n}, #{even}")
     end
     get root_url
     assert_select 'div', attributes: { class: 'image-tag-wrapper' }, count: 10
@@ -43,10 +44,34 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
           assert_equal "https://www.images.com/#{img_num - 1}", img_html.attribute('src').value
         end
         assert_select element, 'p', count: 1 do |p_html|
-          assert_equal "Outdoors-Tag#{img_num - 1}", p_html.text.delete(' ')
+          assert_select p_html, 'a', count: 3
+          assert_select p_html, 'a', count: 1, text: 'Outdoors'
+          assert_select p_html, 'a', count: 1, text: "Tag#{img_num - 1}"
+          even = (img_num - 1).even? ? 'Even' : 'Odd'
+          assert_select p_html, 'a', count: 1, text: even
         end
         img_num -= 1
       end
     end
+  end
+
+  test 'should have correct number of results' do
+    img_num = 10
+    img_num.times do |n|
+      even = n.even? ? 'Even' : 'Odd'
+      Image.create(url: "https://www.images.com/#{n}", tag_list: "Outdoors, Tag#{n}, #{even}")
+    end
+    get filter_path(tag: 'Outdoors')
+    assert_select 'div', attributes: { class: 'image-tag-wrapper' }, count: img_num
+    assert_select 'a', text: 'Even', count: img_num / 2
+    assert_select 'a', text: 'Odd', count: img_num / 2
+    get filter_path(tag: 'Even')
+    assert_select 'div', attributes: { class: 'image-tag-wrapper' }, count: img_num / 2
+    assert_select 'a', text: 'Even', count: img_num / 2
+    assert_select 'a', text: 'Odd', count: 0
+    get filter_path(tag: 'Odd')
+    assert_select 'div', attributes: { class: 'image-tag-wrapper' }, count: img_num / 2
+    assert_select 'a', text: 'Even', count: 0
+    assert_select 'a', text: 'Odd', count: img_num / 2
   end
 end

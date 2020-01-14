@@ -4,7 +4,7 @@ class ImagesController < ApplicationController
   end
 
   def filter
-    @images = Image.tagged_with(params[:tag])
+    @images = Image.tagged_with(params[:tag]).order(created_at: :desc)
     @image_tag = params[:tag]
   end
 
