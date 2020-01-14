@@ -43,7 +43,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
           assert_equal "https://www.images.com/#{img_num - 1}", img_html.attribute('src').value
         end
         assert_select element, 'p', count: 1 do |p_html|
-          assert_equal "Outdoors, Tag#{img_num - 1}", p_html.text
+          assert_equal "Outdoors-Tag#{img_num - 1}", p_html.text.delete(' ')
         end
         img_num -= 1
       end
