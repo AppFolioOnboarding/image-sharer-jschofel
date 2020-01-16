@@ -2,13 +2,20 @@ module PageObjects
   module Images
     class ShowPage < PageObjects::Document
       path :image
+      collection :tag_links, locator: '.tags', item_locator: 'li' do
+        element :tag_link, locator: '.tag'
+      end
 
       def image_url
-        # TODO
+        node.find('img')[:src]
       end
 
       def tags
-        # TODO
+        output = []
+        tag_links.each do |tag_a|
+          output << tag_a.text
+        end
+        output
       end
 
       def delete
@@ -22,7 +29,8 @@ module PageObjects
       end
 
       def go_back_to_index!
-        # TODO
+        node.click_on("Ropes Application")
+        window.change_to(IndexPage)
       end
     end
   end

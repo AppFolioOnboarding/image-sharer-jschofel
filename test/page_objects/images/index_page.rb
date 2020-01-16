@@ -1,9 +1,9 @@
 module PageObjects
   module Images
     class IndexPage < PageObjects::Document
-      path :images
+      path :root
 
-      collection :images, locator: '#TODO', item_locator: '#TODO', contains: ImageCard do
+      collection :images, locator: '.image-tag-list', item_locator: '.image-tag-container', contains: ImageCard do
         def view!
           # TODO
         end
@@ -15,7 +15,10 @@ module PageObjects
       end
 
       def showing_image?(url:, tags: nil)
-        # TODO
+        images.each do |image|
+          return true if url == image.url && image.tags == tags
+        end
+        false
       end
 
       def clear_tag_filter!

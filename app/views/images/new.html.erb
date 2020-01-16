@@ -1,5 +1,6 @@
-<h1>Upload Image</h1>
-<br>
+<%= render 'layouts/header' %>
+
+<h2>Upload Image</h2>
 <%= simple_form_for @image do |f| %>
   <%= f.input :url, label: 'Image URL' %>
   <%= f.input :tag_list, label: 'Tag List' %>

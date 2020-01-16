@@ -1,0 +1,10 @@
+<div class="image-tag-container">
+  <%= image_tag image.url %>
+  <ul class="tags">
+    <% image.tag_list.each do |image_tag| %>
+      <li>
+        <%= link_to image_tag, root_path(tag: image_tag), class: 'tag'  %>
+      </li>
+    <% end %>
+  </ul>
+</div>

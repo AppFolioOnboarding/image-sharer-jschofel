@@ -1,7 +1,4 @@
-<h1>Ropes Application</h1>
-<h4>
-  <%= link_to "Upload Image", new_image_path %>
-</h4>
+<%= render 'layouts/header' %>
 
 <% unless @image_tag.nil? %>
 <h4>
@@ -10,15 +7,8 @@
   "<%= @image_tag %>"
 </h4>
 <%  end %>
-
-<% @images.each do |image| %>
-  <div class="image-tag-container">
-    <%= image_tag image.url %>
-    <p>
-      <% image.tag_list.each_with_index do |image_tag, index| %>
-        <%= link_to image_tag, root_path(tag: image_tag)  %>
-        <%= '-' if index != image.tag_list.length - 1 %>
-      <% end %>
-    </p>
-  </div>
-<% end %>
+<div class="image-tag-list">
+  <% @images.each do |image| %>
+    <%= render 'layouts/image', image: image %>
+  <% end %>
+</div>

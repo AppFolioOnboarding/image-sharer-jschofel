@@ -6,7 +6,11 @@ module PageObjects
       end
 
       def tags
-        # TODO
+        output = []
+        node.all('a.tag').each do |tag|
+          output << tag.text
+        end
+        output
       end
 
       def click_tag!(tag_name)
