@@ -8,16 +8,14 @@ class ImagesCrudTest < FlowTestCase
 
     tags = %w[foo bar]
     new_image_page = new_image_page.create_image!(
-        image_url: 'invalid',
-        image_tags: tags.join(', ')
+      image_url: 'invalid',
+      image_tags: tags.join(', ')
     ).as_a(PageObjects::Images::NewPage)
     assert_equal 'must be a valid URL', new_image_page.error
 
     image_url = 'https://media3.giphy.com/media/EldfH1VJdbrwY/200.gif'
-    #new_image_page.url.set(image_url)
 
     image_show_page = new_image_page.create_image! image_url: image_url, image_tags: tags.join(', ')
-    #assert_equal 'You have successfully added an image.', image_show_page.flash_message(:success)
 
     assert_equal image_url, image_show_page.image_url
     assert_equal tags, image_show_page.tags
@@ -50,7 +48,6 @@ class ImagesCrudTest < FlowTestCase
     end
 
     images_index_page = image_show_page.delete_and_confirm!
-    assert_equal 'You have successfully deleted the image.', images_index_page.flash_message(:success)
 
     assert_equal 1, images_index_page.images.count
     assert_not images_index_page.showing_image?(url: ugly_cat_url)

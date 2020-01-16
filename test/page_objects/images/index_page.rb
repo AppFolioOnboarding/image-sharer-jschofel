@@ -1,13 +1,11 @@
+require_relative 'image_card'
+
 module PageObjects
   module Images
     class IndexPage < PageObjects::Document
       path :root
 
-      collection :images, locator: '.image-tag-list', item_locator: '.image-tag-container', contains: ImageCard do
-        def view!
-          # TODO
-        end
-      end
+      collection :images, locator: '.image-tag-list', item_locator: '.image-tag-container', contains: ImageCard
 
       def add_new_image!
         node.click_on('New Image')
