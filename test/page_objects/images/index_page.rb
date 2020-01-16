@@ -16,13 +16,14 @@ module PageObjects
 
       def showing_image?(url:, tags: nil)
         images.each do |image|
-          return true if url == image.url && image.tags == tags
+          return true if url == image.url && (tags.nil? || image.tags == tags)
         end
         false
       end
 
       def clear_tag_filter!
-        # TODO
+        node.click_on('Ropes Application')
+        window.change_to(IndexPage)
       end
     end
   end
