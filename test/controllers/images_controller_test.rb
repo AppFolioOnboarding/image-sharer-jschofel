@@ -73,4 +73,10 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_select 'a', text: 'Even', count: 0
     assert_select 'a', text: 'Odd', count: img_num / 2
   end
+
+  test 'delete should fail' do
+    assert_raises ActiveRecord::RecordNotFound do
+      delete image_url(Image.count + 1)
+    end
+  end
 end
