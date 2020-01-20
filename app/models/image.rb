@@ -9,6 +9,6 @@ class Image < ApplicationRecord
     return if url.start_with?('https://')
     return if url.start_with?('http://')
 
-    errors.add(:url, 'Invalid URL')
+    errors.add(:url, 'must be a valid URL')
   end
 end

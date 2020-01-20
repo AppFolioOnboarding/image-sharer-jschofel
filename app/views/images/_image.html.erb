@@ -1,0 +1,12 @@
+<div class="image-tag-container">
+  <%= link_to image_tag(image.url), image_path(image) %>
+  <ul class="tags">
+    <% image.tag_list.each do |image_tag| %>
+      <li>
+        <%= link_to image_tag, root_path(tag: image_tag), class: 'tag'  %>
+      </li>
+    <% end %>
+  </ul>
+  <%= link_to 'Delete Image', image_path(image), method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+</div>
